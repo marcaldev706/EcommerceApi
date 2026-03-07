@@ -55,11 +55,8 @@ public class AddressService {
     }
 
 
-    public List<AddressEntity> listAll(Long userId) {
-
-        findUserOrThrow(userId);
-
-        return addressRepository.findAllByUserId(userId);
+    public List<AddressEntity> listAll( ) {
+        return addressRepository.findAll();
     }
 
 
