@@ -44,26 +44,18 @@ O projeto segue uma arquitetura em camadas:
 ---
 
 ## FUNCIONALIDADES
+<img width="1024" height="1536" alt="ChatGPT Image 8 de mar  de 2026, 17_48_11" src="https://github.com/user-attachments/assets/ba222ebe-884f-4309-8fc0-2201e499c56c" />
 
 Usuários
 
-* Criar usuário
-* Listar usuários
-* Buscar usuário por ID
 
 Produtos
 
-* Criar produto
-* Listar produtos
-* Buscar produto por ID
 
-Pedidos (em desenvolvimento)
+Pedidos 
 
-* Criar pedido
-* Associar produtos ao pedido
-* Listar pedidos
 
----
+Pedido
 
 ## AUTOR
 
