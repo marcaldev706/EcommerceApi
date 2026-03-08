@@ -1,5 +1,6 @@
 package com.ecommerce.app.generalExceptionsHandler;
 
+import com.ecommerce.app.product.exception.NoProductFound;
 import com.ecommerce.app.user.exception.IdDoesNotBelong;
 import com.ecommerce.app.user.exception.NoAddressFound;
 import com.ecommerce.app.user.exception.NoUserFound;
@@ -33,5 +34,11 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(IdDoesNotBelong.class)
     public ResponseEntity<String> idDoesNotBelong(IdDoesNotBelong exception){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
+    }
+
+    //Product Exception Handler
+    @ExceptionHandler(NoProductFound.class)
+    public ResponseEntity<String> noProductFound(NoProductFound exception){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
     }
 }
