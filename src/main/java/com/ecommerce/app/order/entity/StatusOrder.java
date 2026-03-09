@@ -1,4 +1,4 @@
-package com.ecommerce.app.order;
+package com.ecommerce.app.order.entity;
 
 public enum StatusOrder {
     CREATED,
