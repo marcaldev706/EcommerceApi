@@ -4,6 +4,7 @@ import com.ecommerce.app.order.dto.CreateOrderItemResquest;
 import com.ecommerce.app.order.dto.CreateOrderRequest;
 import com.ecommerce.app.order.entity.OrderEntity;
 import com.ecommerce.app.order.entity.StatusOrder;
+import com.ecommerce.app.order.exception.NoOrderFound;
 import com.ecommerce.app.order.orderItem.entity.OrderItemEntity;
 import com.ecommerce.app.order.repository.OrderRepository;
 import com.ecommerce.app.order.orderItem.repository.OrderItemRepository;
@@ -18,6 +19,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -41,6 +44,7 @@ public class OrderService {
         order = orderRepository.save(order);
 
         BigDecimal total = BigDecimal.ZERO;
+        List<OrderItemEntity> orderItems = new ArrayList<>();
 
         for (CreateOrderItemResquest item : request.getItems()) {
 
@@ -52,10 +56,12 @@ public class OrderService {
             orderItem.setQuantity(item.getQuantity());
             orderItem.setPrice(product.getPrice());
 
-            orderItemRepository.save(orderItem);
+            orderItems.add(orderItem);
 
             total = total.add(calculateItemTotal(product, item));
         }
+
+        orderItemRepository.saveAll(orderItems);
 
         order.setTotal(total);
 
@@ -75,5 +81,23 @@ public class OrderService {
     private BigDecimal calculateItemTotal(ProductEntity product, CreateOrderItemResquest item) {
         return product.getPrice()
                 .multiply(BigDecimal.valueOf(item.getQuantity()));
+    }
+
+
+    public List<OrderEntity> getAllOrders() {
+        return orderRepository.findAll();
+    }
+
+    public OrderEntity getOrderById(Long orderId) {
+        return orderRepository.findById(orderId)
+                .orElseThrow(() -> new NoOrderFound(orderId));
+    }
+
+    public void deleteOrder(Long orderId) {
+
+        OrderEntity order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new NoOrderFound(orderId));
+
+        orderRepository.delete(order);
     }
 }
