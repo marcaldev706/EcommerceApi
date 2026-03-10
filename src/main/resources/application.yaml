@@ -5,7 +5,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/e-commerce?useTimezone=true&serverTimezone=UTC
     username: root
-    password: 991725Guma
+    password:
   jpa:
     hibernate:
       ddl-auto: update
