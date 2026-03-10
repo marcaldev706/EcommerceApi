@@ -1,4 +1,4 @@
-package com.ecommerce.app.orderItem.entity;
+package com.ecommerce.app.order.orderItem.entity;
 
 import com.ecommerce.app.order.entity.OrderEntity;
 import com.ecommerce.app.product.entity.ProductEntity;
